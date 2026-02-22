@@ -15,13 +15,25 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState } = React;
-        // This creates React components out of the Lucide library icons
-        const { 
-          ChevronRight, ChevronLeft, ShieldAlert, Cpu, Users, Eye, 
-          Scale, BookOpen, Target, AlertTriangle, CheckCircle, 
-          HelpCircle, Globe, Activity, Briefcase, FileText 
-        } = lucide;
+        const { useState, useEffect } = React;
+
+// THIS IS THE BRIDGE: It turns Lucide strings into React components
+const Cpu = (props) => <i data-lucide="cpu" {...props}></i>;
+const ChevronRight = (props) => <i data-lucide="chevron-right" {...props}></i>;
+const ChevronLeft = (props) => <i data-lucide="chevron-left" {...props}></i>;
+const ShieldAlert = (props) => <i data-lucide="shield-alert" {...props}></i>;
+const Users = (props) => <i data-lucide="users" {...props}></i>;
+const Eye = (props) => <i data-lucide="eye" {...props}></i>;
+const Scale = (props) => <i data-lucide="scale" {...props}></i>;
+const BookOpen = (props) => <i data-lucide="book-open" {...props}></i>;
+const Target = (props) => <i data-lucide="target" {...props}></i>;
+const AlertTriangle = (props) => <i data-lucide="alert-triangle" {...props}></i>;
+const CheckCircle = (props) => <i data-lucide="check-circle" {...props}></i>;
+const HelpCircle = (props) => <i data-lucide="help-circle" {...props}></i>;
+const Globe = (props) => <i data-lucide="globe" {...props}></i>;
+const Activity = (props) => <i data-lucide="activity" {...props}></i>;
+const Briefcase = (props) => <i data-lucide="briefcase" {...props}></i>;
+const FileText = (props) => <i data-lucide="file-text" {...props}></i>;
       
       // PASTE YOUR EXISTING REACT CODE BELOW THIS LINE
         
