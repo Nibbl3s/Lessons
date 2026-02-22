@@ -6,19 +6,21 @@
     <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div id="root"></div>
 
-    <script type="text/babel" const { useState } = React;
+    <script type="text/babel">
+        const { useState } = React;
         // This creates React components out of the Lucide library icons
-const { 
-  ChevronRight, ChevronLeft, ShieldAlert, Cpu, Users, Eye, 
-  Scale, BookOpen, Target, AlertTriangle, CheckCircle, 
-  HelpCircle, Globe, Activity, Briefcase, FileText 
-} = lucide;>
+        const { 
+          ChevronRight, ChevronLeft, ShieldAlert, Cpu, Users, Eye, 
+          Scale, BookOpen, Target, AlertTriangle, CheckCircle, 
+          HelpCircle, Globe, Activity, Briefcase, FileText 
+        } = lucide;
+    </script>
       
       // PASTE YOUR EXISTING REACT CODE BELOW THIS LINE
 
