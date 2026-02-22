@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -21,7 +22,9 @@ import {
   HelpCircle, Globe, Activity, Briefcase, FileText
 } from 'lucide-react'; */
 
-export default function App() {
+        const { useState } = React;
+        
+function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [activeTab, setActiveTab] = useState('business');
   const [revealedAnswers, setRevealedAnswers] = useState({});
