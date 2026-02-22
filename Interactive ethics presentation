@@ -1,0 +1,420 @@
+import React, { useState } from 'react';
+import { 
+  ChevronRight, ChevronLeft, ShieldAlert, Cpu, Users, Eye, 
+  Scale, BookOpen, Target, AlertTriangle, CheckCircle, 
+  HelpCircle, Globe, Activity, Briefcase, FileText
+} from 'lucide-react';
+
+export default function App() {
+  const [currentSection, setCurrentSection] = useState(0);
+  const [activeTab, setActiveTab] = useState('business');
+  const [revealedAnswers, setRevealedAnswers] = useState({});
+
+  const nextSection = () => setCurrentSection(prev => Math.min(prev + 1, sections.length - 1));
+  const prevSection = () => setCurrentSection(prev => Math.max(prev - 1, 0));
+
+  const toggleAnswer = (index) => {
+    setRevealedAnswers(prev => ({ ...prev, [index]: !prev[index] }));
+  };
+
+  const sections = [
+    { id: 'hero', title: '1. Introduction' },
+    { id: 'question', title: '2. The Core Question' },
+    { id: 'approach', title: '3. Understanding the Problem' },
+    { id: 'solution', title: '4. The Frameworks' },
+    { id: 'postmortem', title: '5. Post-Mortem & Traps' },
+    { id: 'apply', title: '6. Application' },
+    { id: 'exercises', title: '7. Exercises' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col">
+      {/* Top Navigation Bar */}
+      <header className="bg-slate-900 text-white p-4 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <div className="flex items-center gap-2">
+          <Cpu className="text-orange-500" />
+          <h1 className="font-bold text-lg sm:text-xl tracking-tight hidden sm:block">The Ethical Algorithm</h1>
+        </div>
+        <div className="flex gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
+          {sections.map((sec, idx) => (
+            <button 
+              key={sec.id}
+              onClick={() => setCurrentSection(idx)}
+              className={`flex items-center px-3 py-1.5 rounded-full text-xs sm:text-sm transition-all whitespace-nowrap ${
+                currentSection === idx 
+                  ? 'bg-orange-500 text-white font-bold' 
+                  : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'
+              }`}
+            >
+              <span className="hidden sm:inline mr-1">{sec.title.split('.')[0]}.</span>
+              {sec.title.split('. ')[1] || sec.title}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* Main Content Area */}
+      <main className="flex-grow flex flex-col items-center justify-center p-4 sm:p-8 overflow-y-auto">
+        <div className="max-w-5xl w-full bg-white rounded-2xl shadow-xl overflow-hidden transition-all duration-500 min-h-[650px] flex flex-col border border-slate-200">
+          
+          {/* 1. Hero Banner */}
+          {currentSection === 0 && (
+            <div className="flex flex-col md:flex-row h-full animate-fade-in flex-grow">
+              <div className="md:w-1/2 bg-gradient-to-br from-slate-900 to-slate-800 p-10 flex flex-col justify-center text-white">
+                <div className="inline-block bg-white/10 text-orange-400 border border-white/20 text-xs font-bold px-3 py-1 rounded-full mb-6 w-max">
+                  DIGITAL STRATEGY & INNOVATION
+                </div>
+                <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 leading-tight">
+                  The Ethical <span className="text-orange-500">Algorithm</span>
+                </h1>
+                <p className="text-slate-300 text-lg sm:text-xl leading-relaxed">
+                  Real-World Impacts of AI on Business & Society. 
+                </p>
+                <div className="mt-8 pt-8 border-t border-slate-700">
+                  <p className="text-sm text-slate-400">Investigate corporate AI decisions, interrogate their consequences, and synthesize critical solutions.</p>
+                </div>
+              </div>
+              <div className="md:w-1/2 bg-slate-50 p-10 flex flex-col justify-center border-l border-slate-200">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <Target className="text-blue-500 mb-2" size={24} />
+                    <h3 className="font-bold text-slate-900 mb-1">Analyze</h3>
+                    <p className="text-xs text-slate-600">The impact of Industry 4.0 on operations and structures.</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+                    <ShieldAlert className="text-red-500 mb-2" size={24} />
+                    <h3 className="font-bold text-slate-900 mb-1">Critique</h3>
+                    <p className="text-xs text-slate-600">Ethical implications like algorithmic bias & privacy.</p>
+                  </div>
+                  <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-200 col-span-2">
+                    <Users className="text-purple-500 mb-2" size={24} />
+                    <h3 className="font-bold text-slate-900 mb-1">Engage</h3>
+                    <p className="text-xs text-slate-600">Debate the ethical considerations of implementing new technologies in real business cases.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 2. The Question */}
+          {currentSection === 1 && (
+            <div className="bg-slate-900 text-white p-10 flex flex-col h-full flex-grow animate-fade-in relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500/10 blur-3xl rounded-full translate-x-1/3 -translate-y-1/3"></div>
+              
+              <div className="relative z-10 flex flex-col h-full justify-center max-w-3xl mx-auto">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center">
+                    <HelpCircle size={28} className="text-orange-500" />
+                  </div>
+                  <h2 className="text-3xl font-bold">Making It Real</h2>
+                </div>
+                
+                <h3 className="text-4xl sm:text-5xl font-extrabold mb-8 leading-tight">
+                  If a machine automates a decision that ruins a life, <span className="text-orange-500 border-b-4 border-orange-500">who goes to jail?</span>
+                </h3>
+                
+                <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700 backdrop-blur-sm shadow-2xl">
+                  <h4 className="text-xl font-bold mb-4 text-slate-200 flex items-center gap-2">
+                    <Eye className="text-blue-400" /> The "Black Box" Problem
+                  </h4>
+                  <p className="text-lg text-slate-300 mb-4 leading-relaxed">
+                    Industry 4.0 relies on deep learning algorithms that function as "Black Boxes." They take inputs (our data) and generate outputs (decisions). 
+                  </p>
+                  <p className="text-lg text-slate-300 leading-relaxed">
+                    <strong>The Crisis:</strong> Even the creators often cannot explain exactly <em>how</em> the AI reached a specific conclusion. If an AI denies a loan unfairly or misidentifies a citizen, and we cannot explain the decision, we cannot assign accountability.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 3. The Approach (Business vs Society) */}
+          {currentSection === 2 && (
+            <div className="p-8 flex flex-col h-full flex-grow animate-fade-in bg-slate-50">
+              <h2 className="text-3xl font-bold mb-2 text-slate-900">Understanding the Problem</h2>
+              <p className="text-slate-600 mb-6">The Fourth Industrial Revolution is a double-edged sword. We must map the business benefits against the societal costs.</p>
+              
+              <div className="flex gap-2 mb-6">
+                <button 
+                  onClick={() => setActiveTab('business')}
+                  className={`px-6 py-2 rounded-lg font-bold transition-colors ${activeTab === 'business' ? 'bg-blue-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'}`}
+                >
+                  <Briefcase size={18} className="inline mr-2" />
+                  Business Impacts
+                </button>
+                <button 
+                  onClick={() => setActiveTab('society')}
+                  className={`px-6 py-2 rounded-lg font-bold transition-colors ${activeTab === 'society' ? 'bg-red-600 text-white shadow-md' : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'}`}
+                >
+                  <Globe size={18} className="inline mr-2" />
+                  Societal Impacts
+                </button>
+              </div>
+
+              {activeTab === 'business' ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-fade-in flex-grow">
+                  <div className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm">
+                    <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                      <Target className="text-blue-600" size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">Decision-Making</h3>
+                    <ul className="space-y-3 text-sm text-slate-600">
+                      <li><strong>Predictive Analytics:</strong> Forecasting demand and loan default risks using historical data.</li>
+                      <li><strong>Risk Assessment:</strong> ML models evaluating investments and insurance policies accurately.</li>
+                      <li><strong>Resource Allocation:</strong> Optimizing manpower, inventory, and logistics to reduce costs.</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm">
+                    <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                      <Users className="text-blue-600" size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">Customer Service</h3>
+                    <ul className="space-y-3 text-sm text-slate-600">
+                      <li><strong>Chatbots:</strong> Handling routine queries, detecting emotional tone via natural language processing.</li>
+                      <li><strong>Personalization:</strong> Analyzing behavior to offer bespoke recommendations (e.g., e-commerce).</li>
+                      <li><strong>Insights:</strong> Analyzing sentiment across social media for product improvement.</li>
+                    </ul>
+                  </div>
+                  <div className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm">
+                    <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                      <Activity className="text-blue-600" size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">Automation</h3>
+                    <ul className="space-y-3 text-sm text-slate-600">
+                      <li><strong>RPA:</strong> Robots performing data entry and invoice processing.</li>
+                      <li><strong>Supply Chain:</strong> Predicting disruptions and rerouting automatically.</li>
+                      <li><strong>Automated Marketing:</strong> Executing segmented campaigns at scale without human intervention.</li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in flex-grow">
+                  {[
+                    { title: "Job Displacement", desc: "Automated manufacturing and the Gig economy displace manual labor and threaten job security/rights.", icon: <Briefcase /> },
+                    { title: "Data Privacy", desc: "Mass surveillance, facial recognition, and data harvesting by corporations (e.g., Cambridge Analytica).", icon: <ShieldAlert /> },
+                    { title: "Digital Divide", desc: "Unequal access to internet and educational tech widens the gap between socioeconomic groups.", icon: <Globe /> },
+                    { title: "Social Dynamics", desc: "Algorithms create 'echo chambers' driving polarization and accelerating the spread of misinformation.", icon: <Users /> },
+                    { title: "Healthcare", desc: "Telemedicine requires digital literacy; AI diagnosis risks algorithmic bias against minorities.", icon: <Activity /> },
+                    { title: "Environmental", desc: "Rapid tech cycles generate massive e-waste; massive computational power contributes to emissions.", icon: <Scale /> }
+                  ].map((item, idx) => (
+                    <div key={idx} className="bg-white p-5 rounded-xl border border-red-100 shadow-sm flex flex-col">
+                      <div className="text-red-500 mb-3">{item.icon}</div>
+                      <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed flex-grow">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* 4. The Solution (Frameworks) */}
+          {currentSection === 3 && (
+            <div className="p-8 flex flex-col h-full flex-grow animate-fade-in">
+              <h2 className="text-3xl font-bold mb-2">The Framework Solutions</h2>
+              <p className="text-slate-600 mb-6">These are not just theoretical labels; they are analytical instruments to evaluate the ethics of technology.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-grow content-start">
+                {[
+                  { title: "Consequentialism", focus: "Outcomes & Net Benefit", desc: "Evaluates ethics based on outcomes. Is the net good greater than the harm? Caution: Can justify unethical means for profitable ends.", color: "border-blue-200 bg-blue-50" },
+                  { title: "Deontological Ethics", focus: "Rules & Autonomy", desc: "Focuses on the actions themselves. E.g., data collection without consent is inherently unethical, regardless of how useful the resulting product is.", color: "border-red-200 bg-red-50" },
+                  { title: "Virtue Ethics", focus: "Character & Integrity", desc: "Considers the intentions behind the action. Does the company transparently respect users, acting as a 'virtuous' organization?", color: "border-green-200 bg-green-50" },
+                  { title: "Rights-Based Ethics", focus: "Consent & Ownership", desc: "Emphasizes individual liberties, user consent, and the right to privacy against corporate or government surveillance.", color: "border-purple-200 bg-purple-50" },
+                  { title: "Fairness & Justice", focus: "Bias & Equity", desc: "Scrutinizes algorithms for inherited biases to prevent discriminatory outcomes, ensuring equitable treatment for all.", color: "border-orange-200 bg-orange-50" },
+                  { title: "EU & OECD Guidelines", focus: "Lawful, Ethical, Robust", desc: "Modern regulatory frameworks demanding AI promotes inclusive growth, sustainable development, and human well-being.", color: "border-teal-200 bg-teal-50" }
+                ].map((fw, idx) => (
+                  <div key={idx} className={`p-5 rounded-xl border ${fw.color} flex flex-col`}>
+                    <h3 className="font-bold text-lg text-slate-900 mb-1">{fw.title}</h3>
+                    <div className="inline-block bg-white text-xs font-mono px-2 py-1 rounded mb-3 w-max text-slate-600 border border-slate-200">{fw.focus}</div>
+                    <p className="text-sm text-slate-700 leading-relaxed flex-grow">{fw.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* 5. Post-Mortem & Traps */}
+          {currentSection === 4 && (
+            <div className="p-8 flex flex-col h-full flex-grow animate-fade-in bg-orange-50/50">
+              <h2 className="text-3xl font-bold mb-2 text-slate-900">Post-Mortem: The Three Traps</h2>
+              <p className="text-slate-600 mb-8">What goes wrong when we fail to apply frameworks correctly? Avoid these pitfalls.</p>
+              
+              <div className="space-y-6 flex-grow max-w-4xl mx-auto w-full">
+                <div className="bg-white p-6 rounded-xl border border-orange-200 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-2 h-full bg-orange-500"></div>
+                  <h3 className="font-bold text-xl text-slate-900 mb-2 flex items-center gap-2">
+                    <AlertTriangle className="text-orange-500" /> Trap 1: The Consequentialist Shortcut
+                  </h3>
+                  <p className="text-slate-700 leading-relaxed">
+                    Relying purely on Consequentialism to justify ethically questionable means simply because the end result or profitability looks positive. A framework that can excuse any harm in the name of net benefit is not rigorous analysis—it is rationalisation. 
+                  </p>
+                </div>
+
+                <div className="bg-white p-6 rounded-xl border border-slate-300 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-2 h-full bg-slate-800"></div>
+                  <h3 className="font-bold text-xl text-slate-900 mb-2 flex items-center gap-2">
+                    <Eye className="text-slate-800" /> Trap 2: Ignoring the Black Box
+                  </h3>
+                  <p className="text-slate-700 leading-relaxed">
+                    Failing to ask who is ultimately accountable when an AI system makes a harmful or biased decision. Decisions affecting people's lives are made without transparency or recourse. Your analysis must engage with this accountability gap directly, not sidestep it.
+                  </p>
+                </div>
+
+                <div className="bg-white p-6 rounded-xl border border-red-200 shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-2 h-full bg-red-500"></div>
+                  <h3 className="font-bold text-xl text-slate-900 mb-2 flex items-center gap-2">
+                    <FileText className="text-red-500" /> Trap 3: The Summary Disguised as Analysis
+                  </h3>
+                  <p className="text-slate-700 leading-relaxed">
+                    Writing a descriptive account of a company's automation rather than a critical, framework-backed analysis of its social impact. Describing <em>what</em> the company automated is not the assignment. Evaluating <em>why</em> it matters ethically is.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 6. Application */}
+          {currentSection === 5 && (
+            <div className="p-8 flex flex-col h-full flex-grow animate-fade-in bg-slate-900 text-white">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-blue-600 rounded-lg">
+                  <Target size={28} className="text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold">How Can We Apply This?</h2>
+                  <p className="text-blue-300">The 90-Minute War Room Assignment</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 flex-grow">
+                <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col">
+                  <div className="text-orange-500 font-mono text-sm mb-4 bg-orange-500/10 inline-block px-3 py-1 rounded w-max">00:00 - 20:00</div>
+                  <h3 className="font-bold text-xl mb-3">Phase 1: Case Discovery</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed flex-grow">
+                    Work independently. Search for recent real-world cases where a company's use of AI produced a significant societal impact. Identify the stakeholders directly affected—and those who were not consulted.
+                  </p>
+                </div>
+                
+                <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col relative">
+                  <div className="text-teal-400 font-mono text-sm mb-4 bg-teal-400/10 inline-block px-3 py-1 rounded w-max">20:00 - 50:00</div>
+                  <h3 className="font-bold text-xl mb-3">Phase 2: Group Synergy</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed flex-grow">
+                    Bring your case to your peer group and prepare for a cross-examination. Focus the debate: what ethical boundaries were crossed regarding data privacy or surveillance? Use the friction of disagreement as intellectual fuel.
+                  </p>
+                </div>
+
+                <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col">
+                  <div className="text-purple-400 font-mono text-sm mb-4 bg-purple-400/10 inline-block px-3 py-1 rounded w-max">50:00 - 90:00</div>
+                  <h3 className="font-bold text-xl mb-3">Phase 3: Synthesis</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                    Draft your executive report connecting your findings to your specific business case.
+                  </p>
+                  <ul className="text-xs space-y-2 text-slate-300 font-mono bg-slate-900 p-4 rounded-lg border border-slate-700 mt-auto">
+                    <li className="flex items-start gap-2"><ChevronRight size={14} className="text-purple-400 mt-0.5" /> Apply a combination of frameworks.</li>
+                    <li className="flex items-start gap-2"><ChevronRight size={14} className="text-purple-400 mt-0.5" /> Connect technical mechanisms to ethical failures.</li>
+                    <li className="flex items-start gap-2"><ChevronRight size={14} className="text-purple-400 mt-0.5" /> Conclude with an evidence-backed position.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 7. Exercises (Socratic Checks) */}
+          {currentSection === 6 && (
+            <div className="p-8 flex flex-col h-full flex-grow animate-fade-in bg-slate-50">
+              <h2 className="text-3xl font-bold mb-2 text-slate-900">Individual Reflection</h2>
+              <p className="text-slate-600 mb-6">Exit Check: These questions test whether you can articulate the conceptual core independent of your group discussion.</p>
+              
+              <div className="space-y-4 flex-grow overflow-y-auto pr-2">
+                {[
+                  {
+                    q: "Why can a Consequentialist argument justify an action that a Deontologist would condemn — and which is the more appropriate lens for evaluating data collection without consent?",
+                    hint: "Think about the difference between evaluating outcomes (profit) versus evaluating the act itself (violating autonomy)."
+                  },
+                  {
+                    q: "When an AI system produces a discriminatory output and no human made the specific decision, who is accountable — and which ethical framework gives you the clearest answer?",
+                    hint: "Consider: the data collector, model designer, deploying company, and regulator each hold a piece of the accountability chain."
+                  },
+                  {
+                    q: "At what specific point in the AI development pipeline does algorithmic bias originate — and could it have been identified and corrected before deployment?",
+                    hint: "Think about data collection, labeling, model training, testing, and deployment as distinct ethical checkpoints."
+                  },
+                  {
+                    q: "In your case, was the harm a predictable consequence of the design, or an unintended side effect of scaling — and does that distinction change the ethical verdict under a Virtue Ethics lens?",
+                    hint: "A harm that was foreseeable is rarely excused by intent — but the character of the organization behind the decision still matters."
+                  },
+                  {
+                    q: "What does the most ethically complex case from your group discussion reveal about the assumptions your own business case may be making?",
+                    hint: "Comparative case analysis exists to illuminate your own blind spots — not just to evaluate other companies."
+                  }
+                ].map((exercise, idx) => (
+                  <div key={idx} className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                    <button 
+                      onClick={() => toggleAnswer(idx)}
+                      className="w-full p-5 text-left flex justify-between items-start hover:bg-slate-50 transition-colors"
+                    >
+                      <div className="flex gap-4">
+                        <div className="w-8 h-8 rounded-full bg-teal-100 text-teal-700 flex items-center justify-center font-bold flex-shrink-0 mt-0.5">
+                          {idx + 1}
+                        </div>
+                        <h3 className="font-semibold text-slate-900 pr-4 leading-relaxed">{exercise.q}</h3>
+                      </div>
+                      <div className={`transform transition-transform ${revealedAnswers[idx] ? 'rotate-180' : ''}`}>
+                        <ChevronLeft size={20} className="text-slate-400 -rotate-90" />
+                      </div>
+                    </button>
+                    
+                    {revealedAnswers[idx] && (
+                      <div className="p-5 bg-slate-50 border-t border-slate-100 animate-fade-in pl-17">
+                        <div className="flex items-start gap-3">
+                          <HelpCircle size={18} className="text-orange-500 mt-0.5 flex-shrink-0" />
+                          <p className="text-slate-600 text-sm italic">{exercise.hint}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+
+        {/* Footer Navigation Controls */}
+        <div className="max-w-5xl w-full mt-6 flex justify-between items-center px-2">
+          <button 
+            onClick={prevSection}
+            disabled={currentSection === 0}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${currentSection === 0 ? 'bg-slate-200 text-slate-400 cursor-not-allowed opacity-50' : 'bg-white text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 hover:shadow-md'}`}
+          >
+            <ChevronLeft size={20} /> <span className="hidden sm:inline">Back</span>
+          </button>
+          
+          <div className="flex gap-1.5">
+            {sections.map((_, idx) => (
+              <div 
+                key={idx} 
+                className={`h-2 rounded-full transition-all duration-300 ${currentSection === idx ? 'w-6 bg-orange-500' : 'w-2 bg-slate-300'}`}
+              />
+            ))}
+          </div>
+
+          <button 
+            onClick={nextSection}
+            disabled={currentSection === sections.length - 1}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold transition-all ${currentSection === sections.length - 1 ? 'bg-slate-200 text-slate-400 cursor-not-allowed opacity-50' : 'bg-orange-600 text-white shadow-md hover:bg-orange-700 hover:shadow-lg'}`}
+          >
+            <span className="hidden sm:inline">{currentSection === sections.length - 2 ? 'To Exercises' : 'Continue'}</span> <ChevronRight size={20} />
+          </button>
+        </div>
+      </main>
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .pl-17 { padding-left: 4.25rem; }
+      `}} />
+    </div>
+  );
+}
