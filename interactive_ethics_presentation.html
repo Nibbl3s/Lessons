@@ -11,7 +11,7 @@
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
+    <script type="text/babel" const { useState } = React;>
       
       // PASTE YOUR EXISTING REACT CODE BELOW THIS LINE
 
@@ -437,15 +437,6 @@ function App() {
     </div>
   );
 }
-      
-      const App = () => {
-        return (
-          <div>
-            <h1>Interactive Ethics Presentation</h1>
-            {/* Your component logic here */}
-          </div>
-        );
-      };
 
       // Ensure you have this "mount" call at the bottom
       const root = ReactDOM.createRoot(document.getElementById('root'));
