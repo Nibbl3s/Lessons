@@ -49,6 +49,12 @@ function App() {
     setRevealedAnswers(prev => ({ ...prev, [index]: !prev[index] }));
   };
 
+    React.useEffect(() => {
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }, [currentSection]); // Re-runs icons when you change sections
+
   const sections = [
     { id: 'hero', title: '1. Introduction' },
     { id: 'question', title: '2. The Core Question' },
